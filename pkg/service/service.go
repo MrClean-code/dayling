@@ -1,8 +1,12 @@
 package service
 
-import "github.com/MrClean-code/dayling/pkg/repository"
+import (
+	"github.com/MrClean-code/dayling"
+	"github.com/MrClean-code/dayling/pkg/repository"
+)
 
 type Authorization interface {
+	CreateUser(user dayling.User) (int, error)
 }
 
 type TodoList interface {
@@ -18,5 +22,7 @@ type Service struct {
 }
 
 func NewService(repos *repository.Repository) *Service {
-	return &Service{}
+	return &Service{
+		Authorization: NewAuthService(repos.Authorization),
+	}
 }

@@ -7,6 +7,8 @@ import (
 
 type Authorization interface {
 	CreateUser(user dayling.User) (int, error)
+	GenerateToken(name, username string) (string, error)
+	ParseToken(token string) (int, error)
 }
 
 type TodoList interface {
